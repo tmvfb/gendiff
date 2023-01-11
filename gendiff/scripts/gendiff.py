@@ -12,7 +12,10 @@ def show_help():
                         type=argparse.FileType('r'))
     parser.add_argument('file2', metavar='second_file',
                         type=argparse.FileType('r'))
-    args = parser.parse_args()
+    parser.add_argument('-f', '--format', metavar='FORMAT',
+                        help='set format of output')
+    parser.parse_args()
+
 
 def main():
     show_help()
