@@ -3,7 +3,7 @@ install:
 	poetry install
 	python3 -m pip install --user dist/*.whl --force-reinstall
 
-gendiff:
+goo:
 	poetry run gendiff
 
 publish:
