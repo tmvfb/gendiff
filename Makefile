@@ -1,10 +1,13 @@
+selfcheck:
+	poetry check
+
 install:
 	poetry build
 	poetry install
 	python3 -m pip install --user dist/*.whl --force-reinstall
 
-goo:
-	poetry run gendiff
+qi:
+	python3 -m pip install .
 
 publish:
 	poetry publish --dry-run
@@ -14,3 +17,11 @@ lint:
 
 test:
 	poetry run pytest
+
+check: selfcheck test lint
+
+build: check
+	poetry build
+	
+test-coverage:
+	poetry run pytest --cov=gendiff --cov-report xml
