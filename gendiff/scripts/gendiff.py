@@ -7,5 +7,5 @@ def main():
     print(generate_diff(args.file1, args.file2))
 
 
-if __name__ == '__main_':
+if __name__ == '__main__':
     main()
