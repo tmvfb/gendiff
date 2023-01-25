@@ -2,8 +2,8 @@ from gendiff.modules.diff import diff
 
 
 def return_json(file1, file2):
-    # result = list(diff(file1, file2))
-    return diff(file1, file2) 
+    result = diff(file1, file2)
+    return result
     # result.sort(key=lambda x: x[2])
     # result = '\n  '.join(result).\
     #     replace('True', 'true').\
