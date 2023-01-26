@@ -1,7 +1,7 @@
 from gendiff.modules.diff import diff
 
 
-def return_json(file1, file2):
+def stylish(file1, file2):
     result = diff(file1, file2)
     result = make_stylish(result)
     # last symbol of result is '\n', don't need it
