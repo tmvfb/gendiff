@@ -32,14 +32,18 @@ def compare(dict_key, node, path):  # this won't work if key is '-', refactor?
     if len(val_list) == 2:
         if str(dict_key)[0] == '+':
             return False, None  # avoid duplicates
-        return True,\
+        is_modified_node = True
+        outcome =\
             f'Property {path} was updated. From {val_list[0]} to {val_list[1]}\n'  # noqa
     elif str(dict_key)[0] == '-':
-        return True,\
+        is_modified_node = True
+        outcome =\
             f'Property {path} was removed\n'
     elif str(dict_key)[0] == '+':
-        return True,\
+        is_modified_node = True
+        outcome =\
             f'Property {path} was added with value: {val_list[0]}\n'
+    return is_modified_node, outcome
 
 
 def prettify_plain(value):
