@@ -1,6 +1,6 @@
 #!/usr/bin/env/python3
-from gendiff.modules.return_stylish import stylish
-from gendiff.modules.return_plain import plain
+from gendiff.modules.formatters.return_stylish import stylish
+from gendiff.modules.formatters.return_plain import plain
 
 
 def generate_diff(file1, file2, formatter='stylish'):

@@ -1,5 +1,5 @@
 from gendiff.modules.diff import diff
-from gendiff.modules.return_stylish import custom_sort
+from gendiff.modules.formatters.return_stylish import custom_sort
 
 
 def plain(file1, file2):
@@ -8,38 +8,38 @@ def plain(file1, file2):
     return result
 
 
-def make_plain(node, memory='', folder=''):
+def make_plain(node, memory='', folder=''):  # folder stores current path
     node = dict(sorted(node.items(), key=custom_sort))
 
     for key, value in node.items():
         path, nested_path = path_builder(folder, key)
-        is_updated, is_added, is_removed, old, new = compare(key, node)
-        if is_updated and\
-           f'Property {path} was updated. From {old} to {new}' not in memory:
-            memory += f'Property {path} was updated. From {old} to {new}\n'
-        if is_added:
-            memory += f'Property {path} was added with value: {new}\n'
-        if is_removed:
-            memory += f'Property {path} was removed\n'
+        is_modified_item, outcome = compare(key, node, path)
+        if is_modified_item:
+            memory += outcome
         if isinstance(value, dict):
             memory = make_plain(value, memory, nested_path)
     return memory
 
 
-def compare(dict_key, node):  # this won't work if key is '-', consider refactor
+def compare(dict_key, node, path):  # this won't work if key is '-', refactor?
     if str(dict_key[0]) not in ['-', '+']:
-        return False, False, False, None, None
+        return False, None
 
     val_list = [prettify_plain(value)
                 for key, value in node.items()
                 if str(key)[2:] == str(dict_key)[2:]
                 ]
     if len(val_list) == 2:
-        return True, False, False, val_list[0], val_list[1]
+        if str(dict_key)[0] == '+':
+            return False, None  # avoid duplicates
+        return True,\
+            f'Property {path} was updated. From {val_list[0]} to {val_list[1]}\n'  # noqa
     elif str(dict_key)[0] == '-':
-        return False, False, True, val_list[0], None
+        return True,\
+            f'Property {path} was removed\n'
     elif str(dict_key)[0] == '+':
-        return False, True, False, None, val_list[0]
+        return True,\
+            f'Property {path} was added with value: {val_list[0]}\n'
 
 
 def prettify_plain(value):
