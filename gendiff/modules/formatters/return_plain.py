@@ -21,24 +21,24 @@ def make_plain(node, memory='', folder=''):  # folder stores current path
     return memory
 
 
-def compare(dict_key, node, path):  # this won't work if key is '-', refactor?
+def compare(dict_key, node, path):
     is_modified_item = True
-    indicator = str(dict_key)[0]  # catch plus/minus sign
+    indicator = dict_key[:2]  # catch plus/minus sign
     val_list = [prettify_plain(value)
                 for key, value in node.items()
                 if str(key)[2:] == str(dict_key)[2:]
                 ]
     if len(val_list) == 2:
-        if indicator == '+':
+        if indicator == '+ ':
             return False, None  # avoid duplicates
         outcome =\
             f'Property {path} was updated. From {val_list[0]} to {val_list[1]}\n'  # noqa
-    elif indicator not in ['-', '+']:
+    elif indicator not in ['- ', '+ ']:
         return False, None
-    elif indicator == '-':
+    elif indicator == '- ':
         outcome =\
             f'Property {path} was removed\n'
-    elif indicator == '+':
+    elif indicator == '+ ':
         outcome =\
             f'Property {path} was added with value: {val_list[0]}\n'
     return is_modified_item, outcome
@@ -55,11 +55,11 @@ def prettify_plain(value):
 
 
 def path_builder(folder, key):
-    stripped_keyname = str(key)[2:]  # no need for length check!
+    stripped_keyname = key[2:]  # no need for length check!
     if folder:
         path = '.'.join([folder, stripped_keyname])
         nested_path = '.'.join([folder, key])
-    elif str(key)[0] in ['-', '+']:
+    elif key[:2] in ['- ', '+ ']:
         path = stripped_keyname
         nested_path = stripped_keyname
     else:

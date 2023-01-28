@@ -13,7 +13,7 @@ def make_stylish(node, memory='', indent='    '):
 
     for key, value in node.items():
         key_indent = indent_checker(key, indent)
-        memory += ''.join([key_indent, str(key), ': '])
+        memory += ''.join([key_indent, key, ': '])
         if not isinstance(value, dict):
             memory += ''.join([prettify(value), '\n'])
         else:
@@ -24,7 +24,7 @@ def make_stylish(node, memory='', indent='    '):
 
 
 def indent_checker(dict_key, indent):
-    if str(dict_key)[0] in ['-', '+']:
+    if dict_key[:2] in ['- ', '+ ']:
         key_indent = indent[2:]
     else:
         key_indent = indent
@@ -32,7 +32,7 @@ def indent_checker(dict_key, indent):
 
 
 def custom_sort(items):
-    if items[0][0] in ['-', '+']:
+    if items[0][:2] in ['- ', '+ ']:
         return items[0][2:]
     else:
         return items[0]
