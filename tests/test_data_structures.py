@@ -26,4 +26,4 @@ def test_generate_diff_tree_yaml():
     with open('tests/fixtures/diff_tree.txt', 'r') as test_file:
         test_file = test_file.read()
     assert generate_diff('tests/fixtures/tree1.yaml',
-                         'tests/fixtures/tree2.yaml') == test_file
+                         'tests/fixtures/tree2.yml') == test_file
