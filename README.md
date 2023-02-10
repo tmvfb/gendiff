@@ -17,7 +17,7 @@
 
 ### Description
 The package contains CLI application that generates diff between two files with either **flat** or **nested** structure.  
-*Application recursively builds dict of python dicts containing diff between two input files, and provides an output in the desired format.*
+*Application builds diff in the form of python dict of dicts via recursive search, and provides an output in the desired format.*
   
 Supported input formats: 
 1. json ([demo with default output format](https://asciinema.org/a/hdMWhoNNiCLTLfDyKSLi10bvw))
@@ -34,5 +34,9 @@ Output formats:
 * pip >=19.0
 * poetry >=1.2.0
 
-### Installation
-Clone repository, then `$ make install`. Installed app can be used via command line, type `gendiff -h` for help.
+### Installation and usage
+Clone repository, then `$ make install`. Installed app can be used via command line, type `$ gendiff -h` for help.  
+For different output formats use following commands:
+* `$ gendiff -f stylish file1 file2`
+* `$ gendiff -f plain file1 file2`
+* `$ gendiff -f json file1 file2`
