@@ -19,7 +19,7 @@
 The package contains Linux CLI application that generates diff between two files with either **flat** or **nested** structure.  
 *Application builds diff in the form of python dict of dicts via recursive search algorithm, and provides an output in the desired format.*
   
-<a href="https://asciinema.org/a/cL2PWqKeUGI0vsZMf6usSO1Nk" target="_blank"><img src="https://asciinema.org/a/cL2PWqKeUGI0vsZMf6usSO1Nk.svg" style="width:600px;height:400px;" /></a>  
+<a href="https://asciinema.org/a/cL2PWqKeUGI0vsZMf6usSO1Nk" target="_blank"><img src="https://asciinema.org/a/cL2PWqKeUGI0vsZMf6usSO1Nk.svg" style="width:700px;height:467px;" /></a>  
   
 Supported input formats: 
 1. json ([demo with default output format](https://asciinema.org/a/hdMWhoNNiCLTLfDyKSLi10bvw))
