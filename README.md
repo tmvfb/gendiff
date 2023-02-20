@@ -1,4 +1,4 @@
-# gendiff ([hexlet.io](https://ru.hexlet.io/) python course)
+# gendiff 
 [![Actions Status](https://github.com/tmvfb/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/tmvfb/python-project-50/actions)
 [![Github Actions Status](https://github.com/tmvfb/python-project-50/workflows/Python%20CI/badge.svg)](https://github.com/tmvfb/python-project-50/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8fac4dea5b719096bb86/maintainability)](https://codeclimate.com/github/tmvfb/python-project-50/maintainability)
@@ -47,3 +47,7 @@ For different output formats use following commands:
 * `gendiff -f stylish file1 file2`
 * `gendiff -f plain file1 file2`
 * `gendiff -f json file1 file2`
+
+### Acknowledgements
+
+Made as a project for [hexlet.io](https://ru.hexlet.io/) python course.
