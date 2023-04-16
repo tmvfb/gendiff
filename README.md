@@ -39,7 +39,7 @@ Output formats:
 ### Installation and usage
 
 1. `git clone https://github.com/tmvfb/python-project-50.git`
-2. `cd python-project-50`
+2. `cd gendiff`
 3. `make install`
   
 Installed app can be used via command line, type `gendiff -h` for help.  
