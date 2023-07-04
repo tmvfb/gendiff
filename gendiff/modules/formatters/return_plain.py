@@ -12,27 +12,34 @@ def make_plain(node, memory='', folder=''):  # folder stores current path
     node = dict(sorted(node.items(), key=custom_sort))
 
     for key, value in node.items():
-        path, nested_path = path_builder(folder, key)
-        is_modified_item, comparison_outcome = compare(key, node, path)
+        # path describes current nested object e.g. key1.key2
+        path_name, path = build_path(folder, key)
+        is_modified_item, comparison_outcome = compare(key, node, path_name)
         if is_modified_item:
             memory += comparison_outcome
-        if isinstance(value, dict):
-            memory = make_plain(value, memory, nested_path)
+        elif isinstance(value, dict):
+            memory = make_plain(value, memory, path)
     return memory
 
 
 def compare(dict_key, node, path):
+    """
+    Checks if a passed key was modified in the new file.
+    """
     is_modified_item = True
     indicator = dict_key[:2]  # catch plus/minus sign
+
+    # val_list stores all value entries with the passed key in the passed node
+    # 1 entry if the object wasn't modified or was added/removed
+    # 2 entries if the object was modified (one with + and one with - key)
     val_list = [prettify_plain(value)
                 for key, value in node.items()
-                if str(key)[2:] == str(dict_key)[2:]
-                ]
+                if str(key)[2:] == str(dict_key)[2:]]
     if len(val_list) == 2:
         if indicator == '+ ':
             return False, None  # avoid duplicates
         outcome =\
-            f'Property {path} was updated. From {val_list[0]} to {val_list[1]}\n'  # noqa
+            f'Property {path} was updated. From {val_list[0]} to {val_list[1]}\n'  # noqa: E501
     elif indicator not in ['- ', '+ ']:
         return False, None
     elif indicator == '- ':
@@ -54,17 +61,25 @@ def prettify_plain(value):
     return "'".join(['', str(value), ''])
 
 
-def path_builder(folder, key):
-    stripped_keyname = key[2:]  # no need for length check!
+def build_path(folder, key):
+    stripped_keyname = key[2:]
+    # no need for length check!
+    # if key has + or - then len(key) >= 3
+    # else key wasn't modified and stripped_keyname won't be used anywhere
+
     if folder:
-        path = '.'.join([folder, stripped_keyname])
-        nested_path = '.'.join([folder, key])
+        # if key wasn't changed only path variable is used
+        # else only path_name variable is used
+        path = '.'.join([folder, key])
+        path_name = '.'.join([folder, stripped_keyname])
+
+    # cases for highest nesting level
     elif key[:2] in ['- ', '+ ']:
         path = stripped_keyname
-        nested_path = stripped_keyname
+        path_name = stripped_keyname
     else:
         path = key
-        nested_path = key
+        path_name = key
 
-    path = "'" + path + "'"
-    return path, nested_path
+    path_name = "'" + path_name + "'"
+    return path_name, path

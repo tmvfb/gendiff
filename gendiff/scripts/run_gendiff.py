@@ -1,4 +1,5 @@
 #! usr/bin/env/python3
+# NB! never name scripts the same as your package
 from gendiff import add_cli, generate_diff
 
 

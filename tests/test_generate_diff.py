@@ -1,15 +1,13 @@
 import pytest
 from gendiff import generate_diff
 
-
 parameters = [('flat_json_1', 'flat_json_2', 'stylish', 'test_file_flat'),
               ('flat_yaml_1', 'flat_yaml_2', 'stylish', 'test_file_flat'),
               ('tree_json_1', 'tree_json_2', 'stylish', 'test_file_tree'),
               ('tree_json_1', 'tree_json_2', 'stylish', 'test_file_tree'),
               ('tree_yaml_1', 'tree_yaml_2', 'stylish', 'test_file_tree'),
               ('tree_json_1', 'tree_json_2', 'plain', 'test_file_plain'),
-              ('tree_json_1', 'tree_json_2', 'json', 'test_file_json')
-              ]
+              ('tree_json_1', 'tree_json_2', 'json', 'test_file_json')]
 
 
 @pytest.mark.parametrize('file1, file2, format, test_file', parameters)

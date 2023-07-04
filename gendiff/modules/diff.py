@@ -5,13 +5,12 @@ def diff(file1, file2):
     file1 = files_open(file1)
     file2 = files_open(file2)
     result = dict((k, v)  # converting generator to dict of dicts
-                  for pair in tree_diff(file1, file2)
-                  for k, v in pair.items()
-                  )
+                  for pair in build_tree(file1, file2)
+                  for k, v in pair.items())
     return result
 
 
-def tree_diff(dict1, dict2):  # returns a generator (of nested dicts)
+def build_tree(dict1, dict2):  # returns a generator (of nested dicts)
 
     for key, value in dict2.items():
         if key not in dict1.keys():  # checks if key in 1st dict
@@ -27,18 +26,19 @@ def tree_diff(dict1, dict2):  # returns a generator (of nested dicts)
 
 # if key in both dicts + can go deeper (=values are dicts): go deep recursively
 # child is a dict in this case, use dict comprehension to define it correctly
-# tree_diff in dict comp will generate all {key: value} pairs for nested dict
+# build_tree in dict comp will generate all {key: value} pairs for nested dict
         else:
             child = dict((k, v)
-                         for pair in tree_diff(value, dict2[key])
-                         for k, v in pair.items()
-                         )
+                         for pair in build_tree(value, dict2[key])
+                         for k, v in pair.items())
             yield {key: child}
 
 
-# compare 2 {key: value} pairs if at least 1 value is not dict
-# or if one pair is empty
 def compare_pairs(pair1, pair2={}, sign='-'):
+    """
+    Compares 2 {key: value} pairs if at least 1 value is not dict
+    or if one pair was added or removed (is empty).
+    """
     key = list(pair1.keys())[0]
     value = pair1[key]
     if key[:2] in ['- ', '+ ']:

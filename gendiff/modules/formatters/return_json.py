@@ -1,6 +1,7 @@
+import json
+
 from gendiff.modules.diff import diff
 from gendiff.modules.formatters.return_stylish import custom_sort
-import json
 
 
 def to_json(file1, file2):

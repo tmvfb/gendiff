@@ -24,6 +24,8 @@ def make_stylish(node, memory='', indent='    '):
 
 
 def indent_checker(dict_key, indent):
+    # every new nesting level is 4 spaces indented
+    # + and - signs should be a part of the indentation
     if dict_key[:2] in ['- ', '+ ']:
         key_indent = indent[2:]
     else:

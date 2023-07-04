@@ -1,17 +1,26 @@
 import json
-import yaml
 from os import getcwd
+from pathlib import Path
+
+import yaml
 
 
 def files_open(filepath):
-    def loader(path):
-        if filepath.endswith('.json'):
+    extension = Path(filepath).suffix
+
+    def load(path):
+        if extension == ".json":
             return json.load(path)
-        if filepath.endswith(('.yaml', '.yml')):
+        elif extension in [".yaml", ".yml"]:
             return yaml.load(path, Loader=yaml.SafeLoader)
+        else:
+            raise Exception(
+                "Wrong file format. Possible formats are json or yaml."
+            )
+
     try:
-        with open(filepath) as working_file:
-            return loader(working_file)
+        with open(filepath) as f:
+            return load(f)
     except FileNotFoundError:
-        with open('/'.join([getcwd(), filepath])) as working_file:
-            return loader(working_file)
+        with open("/".join([getcwd(), filepath])) as f:
+            return load(f)

@@ -1,6 +1,6 @@
-from gendiff.modules.formatters.return_stylish import stylish
-from gendiff.modules.formatters.return_plain import plain
 from gendiff.modules.formatters.return_json import to_json
+from gendiff.modules.formatters.return_plain import plain
+from gendiff.modules.formatters.return_stylish import stylish
 
 
 def generate_diff(file1, file2, formatter='stylish'):
