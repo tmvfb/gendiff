@@ -12,7 +12,6 @@ packages = [
 python = "^3.8.1"
 pyyaml = "^6.0"
 
-
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
 pytest = "^7.2.1"
@@ -23,4 +22,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-run_gendiff = "gendiff.scripts.run_gendiff:main"
+show_diff = "gendiff.scripts.run_gendiff:main"

@@ -32,21 +32,28 @@ Output formats:
 
 
 ### Prerequisites
+* Linux or WSL
+* git
 * Python >=3.8.1
 * pip >=19.0
 * poetry >=1.2.0
 
 ### Installation and usage
 
-1. `git clone https://github.com/tmvfb/python-project-50.git`
+1. `git clone https://github.com/tmvfb/gendiff.git`
 2. `cd gendiff`
 3. `make install`
   
-Installed app can be used via command line, type `gendiff -h` for help.  
+Check if app is properly installed by running the following in the command line: 
+```sh
+show_diff -f stylish ./tests/fixtures/tree1.yaml ./tests/fixtures/tree2.yml
+```  
+  
+Type `show_diff -h` for help.  
 For different output formats use following commands:
-* `gendiff -f stylish file1 file2`
-* `gendiff -f plain file1 file2`
-* `gendiff -f json file1 file2`
+* `show_diff -f stylish file1 file2`
+* `show_diff -f plain file1 file2`
+* `show_diff -f json file1 file2`
 
 ### Acknowledgements
 
